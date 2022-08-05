@@ -1,0 +1,9 @@
+name: Update corps scores
+on:
+  workflow_dispatch:
+
+jobs:
+  update-scores:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello world!"
