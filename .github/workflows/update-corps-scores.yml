@@ -34,10 +34,10 @@ jobs:
 
           if ! git diff --exit-code scores2023.db; then
             echo "Found some differences!"
-            echo "::set-output name=is_updated::true"
+            echo "is_updated=true" >> $GITHUB_OUTPUT
           else
             echo "Didn't find differences"
-            echo "::set-output name=is_updated::false"
+            echo "is_updated=false" >> $GITHUB_OUTPUT
           fi
       - if: ${{ steps.run-script.outputs.is_updated == 'true' }}
         run: |
@@ -57,7 +57,7 @@ jobs:
   update-graphs:
     needs: update-scores
     runs-on: ubuntu-latest
-    if: ${{ needs.update-scores.outputs.is_updated == 'true' || inputs.force-graph-update == 'true' }}
+    if: ${{ needs.update-scores.outputs.is_updated == 'true' || github.event.inputs.force-graph-update == 'true' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v3
