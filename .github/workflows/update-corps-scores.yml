@@ -32,7 +32,7 @@ jobs:
           pip install -r requirements.txt
           python inputScores.py
 
-          if ! git diff --exit-code scores2023.db; then
+          if ! git diff --exit-code scores2024.db; then
             echo "Found some differences!"
             echo "is_updated=true" >> $GITHUB_OUTPUT
           else
@@ -46,8 +46,8 @@ jobs:
           git config --local user.name "GitHub Action"
 
           # Commit updated DB
-          git add app/fdcigrapher/scores2023.db
-          git commit -m "Automatic update of scores2023.db"
+          git add app/fdcigrapher/scores2024.db
+          git commit -m "Automatic update of scores2024.db"
           git push
       - uses: actions/upload-artifact@v3
         with:
