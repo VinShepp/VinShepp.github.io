@@ -49,7 +49,7 @@ jobs:
           git add app/fdcigrapher/scores2024.db
           git commit -m "Automatic update of scores2024.db"
           git push
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: updated-graphs
           path: app/fdcigrapher/*.html
@@ -59,8 +59,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.update-scores.outputs.is_updated == 'true' || github.event.inputs.force-graph-update == 'true' }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v4
         with:
           name: updated-graphs
           path: corps-scores
