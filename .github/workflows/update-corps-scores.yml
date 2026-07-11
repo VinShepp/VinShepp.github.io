@@ -18,11 +18,11 @@ jobs:
     outputs:
       is_updated: ${{ steps.run-script.outputs.is_updated }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           repository: 'VinShepp/corps-scores'
           ssh-key: ${{ secrets.CORPS_SCORES_KEY }}
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.10'
       - id: run-script
@@ -49,7 +49,7 @@ jobs:
           git add app/fdcigrapher/scores2026.db
           git commit -m "Automatic update of scores2026.db"
           git push
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: updated-graphs
           path: app/fdcigrapher/*.html
@@ -59,8 +59,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.update-scores.outputs.is_updated == 'true' || github.event.inputs.force-graph-update == 'true' }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
         with:
           name: updated-graphs
           path: corps-scores
